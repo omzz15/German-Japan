@@ -25,13 +25,12 @@ import com.example.german_japan.util.ViewManager;
 public class NewGameActivity extends AppCompatActivity {
 
     Client client = AppModels.getClient(this);
-    ViewManager.SpinnerManager.GameSettings gameSettings = ViewManager.getInstance().spinnerManager.gameSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_game);
-        gameSettings.ActivationSequence(this, client);
+        ViewManager.SpinnerManager.GameSettings.ActivationSequence(this, client);
     }
 
 
@@ -39,7 +38,7 @@ public class NewGameActivity extends AppCompatActivity {
     public void onCreateGamePressed(View view)
     {
         GameSettings gs = new GameSettings();
-        Object[] vals = gameSettings.getGroupValues(gameSettings.get());
+        Object[] vals = ViewManager.SpinnerManager.getGroupValues(ViewManager.SpinnerManager.GameSettings.get());
         gs.setPlayers((Integer) vals[0]);
         gs.setDeckCount((Integer) vals[1]);
         gs.setStartingCards((Integer) vals[2]);

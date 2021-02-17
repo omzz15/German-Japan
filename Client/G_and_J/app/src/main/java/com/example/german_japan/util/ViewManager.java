@@ -3,32 +3,21 @@ package com.example.german_japan.util;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.german_japan.R;
 import com.example.german_japan.model.Client;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class ViewManager {
-    private static ViewManager instance;
-    public SpinnerManager spinnerManager = new SpinnerManager();
-
-    public static ViewManager getInstance()
-    {
-        if(instance == null)instance = new ViewManager();
-        return instance;
-    }
-
-
-    public class SpinnerManager extends ViewManager{
-        public GameSettings gameSettings = new GameSettings();
-
+    public static class SpinnerManager{
         ////////////////////
         //get group values//
         ////////////////////
-        public Object[] getGroupValues(Spinner[] spinners)
-        {
+        public static Object[] getGroupValues(Spinner[] spinners) {
             Object[] vals = new Object[spinners.length];
             for(int i = 0; i < spinners.length; i++)
             {
@@ -40,7 +29,7 @@ public class ViewManager {
         /////////
         //other//
         /////////
-        public void setValues(Spinner spinner, AppCompatActivity appCompatActivity, int start, int end, int step, Integer[] otherVals) {
+        public static void setValues(Spinner spinner, AppCompatActivity appCompatActivity, int start, int end, int step, Integer[] otherVals) {
             ArrayList<Integer> arrayList = new ArrayList<>();
             for(Integer i = start; i <= end; i+=step)
             {
@@ -59,8 +48,7 @@ public class ViewManager {
             spinner.setAdapter(arrayAdapter);
         }
 
-        public void setCurrentPos(Spinner spinner, Integer pos)
-        {
+        public static void setCurrentPos(Spinner spinner, Integer pos) {
             spinner.post(new Runnable() {
                 public void run() {
                     spinner.setSelection(pos);
@@ -68,12 +56,9 @@ public class ViewManager {
             });
         }
 
-        public void setCurrentValue(Spinner spinner, Object value)
-        {
-            setCurrentPos(spinner, getIndex(spinner, value));
-        }
+        public static void setCurrentValue(Spinner spinner, Object value) { setCurrentPos(spinner, getIndex(spinner, value)); }
 
-        public int getIndex(Spinner spinner, Object val) {
+        public static int getIndex(Spinner spinner, Object val) {
             for (int i = 0; i < spinner.getCount(); i++) {
                 if (spinner.getItemAtPosition(i) == val) {
                     return i;
@@ -83,39 +68,38 @@ public class ViewManager {
         }
 
         
-        public  class GameSettings extends SpinnerManager
-        {
-            private Spinner[] gameSettingSpinners =  new Spinner[3];
+        public static class GameSettings {
+            private static Spinner[] gameSettingSpinners =  new Spinner[3];
 
-            public void set(AppCompatActivity appCompatActivity)
+            public static void set(AppCompatActivity appCompatActivity)
             {
                 gameSettingSpinners[0] = (appCompatActivity.findViewById(R.id.PlayersInput));
                 gameSettingSpinners[1] = (appCompatActivity.findViewById(R.id.NumOfDecksInput));
                 gameSettingSpinners[2] = (appCompatActivity.findViewById(R.id.StartingCardsInput));
             }
 
-            public void set(Spinner[] gameSettingSpinners) {
-                this.gameSettingSpinners = gameSettingSpinners;
+            public static void set(Spinner[] gameSettingSpinners) {
+                GameSettings.gameSettingSpinners = gameSettingSpinners;
             }
 
-            public Spinner[] get() {
+            public static Spinner[] get() {
                 return gameSettingSpinners;
             }
 
-            public void setValues(AppCompatActivity appCompatActivity)
+            public static void setValues(AppCompatActivity appCompatActivity)
             {
-                setValues(gameSettingSpinners[0], appCompatActivity,2, 8, 2, new Integer[]{3});
-                setValues(gameSettingSpinners[1], appCompatActivity,1, 4, 1, null);
-                setValues(gameSettingSpinners[2], appCompatActivity,13, 17, 2, null);
+                SpinnerManager.setValues(gameSettingSpinners[0], appCompatActivity,2, 8, 2, new Integer[]{3});
+                SpinnerManager.setValues(gameSettingSpinners[1], appCompatActivity,1, 4, 1, null);
+                SpinnerManager.setValues(gameSettingSpinners[2], appCompatActivity,13, 17, 2, null);
             }
-            public void setCurrentPos(Client client)
+            public static void setCurrentPos(Client client)
             {
                 setCurrentValue(gameSettingSpinners[0], client.getGameSettings().getPlayers());
                 setCurrentValue(gameSettingSpinners[1], client.getGameSettings().getDeckCount());
                 setCurrentValue(gameSettingSpinners[2], client.getGameSettings().getStartingCards());
             }
 
-            public void ActivationSequence(AppCompatActivity appCompatActivity, Client client)
+            public static void ActivationSequence(AppCompatActivity appCompatActivity, Client client)
             {
                 set(appCompatActivity);
                 setValues(appCompatActivity);

@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.Group;
 import com.example.german_japan.R;
 import com.example.german_japan.model.AppModels;
 import com.example.german_japan.model.Client;
+import com.example.german_japan.model.GameSettings;
 import com.example.german_japan.util.ViewManager;
 import com.google.android.material.tabs.TabLayout;
 
@@ -18,8 +19,6 @@ public class SettingsActivity extends AppCompatActivity {
     Group gameSettingsGroup;
     Group visualSettingsGroup;
     Group otherSettingsGroup;
-
-    ViewManager.SpinnerManager.GameSettings gameSettings = ViewManager.getInstance().spinnerManager.gameSettings;
 
     Client client = AppModels.getClient(this);
 
@@ -76,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
         visualSettingsGroup = findViewById(R.id.VisualSettingGroup);
         otherSettingsGroup = findViewById(R.id.OtherSettingGroup);
 
-        gameSettings.ActivationSequence(this, client);
+        ViewManager.SpinnerManager.GameSettings.ActivationSequence(this, client);
     }
 
     public void onTest(View view)
