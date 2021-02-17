@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.NewGameActivity">
+
+    <Button
+        android:id="@+id/CreateGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:onClick="onCreateGamePressed"
+        android:text="@string/CreateGame"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/PlayersText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/Players"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/PlayersInput"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/PlayersInput"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/NumberOfDecksText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/NumberOfDecks"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/NumOfDecksInput"
+        app:layout_constraintEnd_toEndOf="@+id/NumOfDecksInput"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/NumOfDecksInput" />
+
+    <TextView
+        android:id="@+id/StartingCardsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/StartingCards"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/StartingCardsInput"
+        app:layout_constraintEnd_toEndOf="@+id/StartingCardsInput"
+        app:layout_constraintStart_toStartOf="@+id/StartingCardsInput" />
+
+    <Spinner
+        android:id="@+id/PlayersInput"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/NumOfDecksInput"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/NumOfDecksInput"
+        app:layout_constraintTop_toBottomOf="@+id/PlayersText" />
+
+    <Spinner
+        android:id="@+id/NumOfDecksInput"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/StartingCardsText"
+        app:layout_constraintEnd_toEndOf="@+id/StartingCardsInput"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/StartingCardsInput"
+        app:layout_constraintTop_toBottomOf="@+id/PlayersInput" />
+
+    <Spinner
+        android:id="@+id/StartingCardsInput"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/CreateGame"
+        app:layout_constraintEnd_toEndOf="@+id/CreateGame"
+        app:layout_constraintStart_toStartOf="@+id/CreateGame" />
+</androidx.constraintlayout.widget.ConstraintLayout>
