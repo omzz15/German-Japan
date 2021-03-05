@@ -35,16 +35,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="NonAutoGenGameSettings, AutoGenSettings"
+        app:constraint_referenced_ids="AutoGenSettingsCheckBox,PlayersInput,PlayersText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+        <CheckBox
+            android:id="@+id/AutoGenSettingsCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:bufferType="normal"
+            android:onClick="onAutoGenSettingsChanged"
+            android:text="@string/AutoGenSettings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SettingTabs" />
+
+        <Button
+            android:id="@+id/SaveGameSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:onClick="onSaveSettingsClicked"
+            android:text="@string/SaveSettings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/NonAutoGenGameSettings"
+        android:id="@+id/NonAutoGameSettingsGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="PlayersText, NumberOfDecksText, StartingCardsText, PlayersInput, NumOfDecksInput, StartingCardsInput"
+        app:constraint_referenced_ids="NumberOfDecksText,StartingCardsText,SequencesRequiredText,NumOfDecksInput,StartingCardsInput,SequencesRequiredInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,33 +102,54 @@
                 app:layout_constraintEnd_toEndOf="@+id/StartingCardsInput"
                 app:layout_constraintStart_toStartOf="@+id/StartingCardsInput" />
 
+            <TextView
+                android:id="@+id/SequencesRequiredText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SequencesRequired"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/SequencesRequiredInput"
+                app:layout_constraintEnd_toEndOf="@+id/SequencesRequiredInput"
+                app:layout_constraintStart_toStartOf="@+id/SequencesRequiredInput" />
+
             <Spinner
                 android:id="@+id/PlayersInput"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="144dp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SettingTabs" />
+                app:layout_constraintTop_toBottomOf="@+id/AutoGenSettingsCheckBox" />
 
             <Spinner
                 android:id="@+id/NumOfDecksInput"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/StartingCardsText"
+                app:layout_constraintBottom_toBottomOf="@+id/SequencesRequiredText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PlayersInput" />
+                app:layout_constraintTop_toBottomOf="@+id/PlayersInput"
+                app:layout_constraintVertical_bias="0.3" />
+
 
             <Spinner
                 android:id="@+id/StartingCardsInput"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:layout_marginBottom="68dp"
+                app:layout_constraintBottom_toTopOf="@+id/SequencesRequiredInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/PlayersInput"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <Spinner
+                android:id="@+id/SequencesRequiredInput"
+                android:layout_width="85dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="50dp"
                 app:layout_constraintBottom_toTopOf="@+id/SaveGameSettings"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/VisualSettingGroup"
@@ -120,30 +164,6 @@
         android:layout_height="wrap_content"
         android:visibility="invisible"
         app:constraint_referenced_ids="" />
-
-
-    <Button
-        android:id="@+id/SaveGameSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:text="@string/SaveSettings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/AutoGenSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:bufferType="normal"
-        android:onClick="onTest"
-        android:text="@string/AutoGenSettings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SettingTabs" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

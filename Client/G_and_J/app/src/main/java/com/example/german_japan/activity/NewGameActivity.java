@@ -30,7 +30,7 @@ public class NewGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_game);
-        ViewManager.SpinnerManager.GameSettings.ActivationSequence(this, client);
+        ViewManager.GameSettings.SpinnerManager.ActivationSequence(this, client);
     }
 
 
@@ -38,7 +38,7 @@ public class NewGameActivity extends AppCompatActivity {
     public void onCreateGamePressed(View view)
     {
         GameSettings gs = new GameSettings();
-        Object[] vals = ViewManager.SpinnerManager.getGroupValues(ViewManager.SpinnerManager.GameSettings.get());
+        Object[] vals = ViewManager.SpinnerManager.getGroupValues(ViewManager.GameSettings.SpinnerManager.get());
         gs.setPlayers((Integer) vals[0]);
         gs.setDeckCount((Integer) vals[1]);
         gs.setStartingCards((Integer) vals[2]);

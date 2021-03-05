@@ -18,4 +18,5 @@
     <string name="Other">Other</string>
     <string name="AutoGenSettings">Use Auto Generated Settings</string>
     <string name="SaveSettings">Save Settings</string>
+    <string name="SequencesRequired">Sequences Required</string>
 </resources>

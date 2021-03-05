@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
            Intent i = new Intent(this, RegisterActivity.class);
            startActivity(i);
         }
-        client = AppModels.getClient(this);
-        setContentView(R.layout.activity_main);
-        TextView playerId = findViewById(R.id.PlayerInfo);
-
-        playerId.setText("Player Name: " + client.getName() + "\n" + "Player ID: " + client.getId());
+        else {
+            setContentView(R.layout.activity_main);
+            TextView playerId = findViewById(R.id.PlayerInfo);
+            playerId.setText("Player Name: " + client.getName() + "\n" + "Player ID: " + client.getId());
+        }
     }
 
     public void onNewGameClicked(View view)

@@ -2,8 +2,10 @@ package com.example.german_japan.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,17 +26,40 @@ import com.google.gson.Gson;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    TextView nameBox;
+    String noNameText = "Please enter a name";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        nameBox = findViewById(R.id.clientName);
     }
 
-    public void onSubmitPressed(View view)
-    {
-        TextView nameBox = findViewById(R.id.clientName);
-        String name = nameBox.getText().toString();
+    public void onSubmitPressed(View view) {
 
+        if (TextUtils.isEmpty(nameBox.getText()) || nameBox.getText().toString().equals(noNameText))
+        {
+            nameBox.setTextColor(getResources().getColor(R.color.WrongRed, null));
+            nameBox.setText(noNameText);
+        }
+        else{
+            sendClient();
+        }
+    }
+
+    public void onTextBoxSelected(View view)
+    {
+        if(nameBox.getText().toString().equals(noNameText)) {
+            nameBox.setTextColor(getResources().getColor(R.color.black, null));
+            nameBox.setText(null);
+        }
+        else if(!TextUtils.isEmpty(nameBox.getText())){sendClient();}
+    }
+
+    private void sendClient()
+    {
+        String name = nameBox.getText().toString();
         CognitoCachingCredentialsProvider cognitoProvider = new CognitoCachingCredentialsProvider(
                 this.getApplicationContext(), "us-west-2:59477c2f-8f43-4984-948f-8dcc4757dd47", Regions.US_WEST_2);
 
@@ -60,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
                     return null;
                 }
             }
-
             @Override
             protected void onPostExecute(LambdaResponse result) {
                 AppModels.setClient(getApplicationContext(), (Client) result.getBodyObj(Client.class));
@@ -69,5 +93,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }.execute(request);
     }
-
 }

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ViewManager {
+    public static class GroupManager{}
+
     public static class SpinnerManager{
         ////////////////////
         //get group values//
@@ -66,41 +68,42 @@ public class ViewManager {
             }
             return 0;
         }
+    }
 
-        
-        public static class GameSettings {
-            private static Spinner[] gameSettingSpinners =  new Spinner[3];
+    public static class GameSettings {
+        public static class SpinnerManager extends ViewManager.SpinnerManager {
+            private static Spinner[] spinners = new Spinner[4];
 
-            public static void set(AppCompatActivity appCompatActivity)
-            {
-                gameSettingSpinners[0] = (appCompatActivity.findViewById(R.id.PlayersInput));
-                gameSettingSpinners[1] = (appCompatActivity.findViewById(R.id.NumOfDecksInput));
-                gameSettingSpinners[2] = (appCompatActivity.findViewById(R.id.StartingCardsInput));
+            public static void set(AppCompatActivity appCompatActivity) {
+                spinners[0] = (appCompatActivity.findViewById(R.id.PlayersInput));
+                spinners[1] = (appCompatActivity.findViewById(R.id.NumOfDecksInput));
+                spinners[2] = (appCompatActivity.findViewById(R.id.StartingCardsInput));
+                spinners[3] = appCompatActivity.findViewById(R.id.SequencesRequiredInput);
             }
 
             public static void set(Spinner[] gameSettingSpinners) {
-                GameSettings.gameSettingSpinners = gameSettingSpinners;
+                SpinnerManager.spinners = gameSettingSpinners;
             }
 
             public static Spinner[] get() {
-                return gameSettingSpinners;
+                return spinners;
             }
 
-            public static void setValues(AppCompatActivity appCompatActivity)
-            {
-                SpinnerManager.setValues(gameSettingSpinners[0], appCompatActivity,2, 8, 2, new Integer[]{3});
-                SpinnerManager.setValues(gameSettingSpinners[1], appCompatActivity,1, 4, 1, null);
-                SpinnerManager.setValues(gameSettingSpinners[2], appCompatActivity,13, 17, 2, null);
-            }
-            public static void setCurrentPos(Client client)
-            {
-                setCurrentValue(gameSettingSpinners[0], client.getGameSettings().getPlayers());
-                setCurrentValue(gameSettingSpinners[1], client.getGameSettings().getDeckCount());
-                setCurrentValue(gameSettingSpinners[2], client.getGameSettings().getStartingCards());
+            public static void setValues(AppCompatActivity appCompatActivity) {
+                SpinnerManager.setValues(spinners[0], appCompatActivity, 2, 8, 2, new Integer[]{3});
+                SpinnerManager.setValues(spinners[1], appCompatActivity, 1, 4, 1, null);
+                SpinnerManager.setValues(spinners[2], appCompatActivity, 13, 17, 2, null);
+                SpinnerManager.setValues(spinners[3], appCompatActivity, 1, 5, 1, null);
             }
 
-            public static void ActivationSequence(AppCompatActivity appCompatActivity, Client client)
-            {
+            public static void setCurrentPos(Client client) {
+                setCurrentValue(spinners[0], client.getGameSettings().getPlayers());
+                setCurrentValue(spinners[1], client.getGameSettings().getDeckCount());
+                setCurrentValue(spinners[2], client.getGameSettings().getStartingCards());
+                setCurrentValue(spinners[3], client.getGameSettings().getSequencesRequired());
+            }
+
+            public static void ActivationSequence(AppCompatActivity appCompatActivity, Client client) {
                 set(appCompatActivity);
                 setValues(appCompatActivity);
                 setCurrentPos(client);
